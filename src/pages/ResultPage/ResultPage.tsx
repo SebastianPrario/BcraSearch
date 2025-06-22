@@ -1,5 +1,4 @@
-import React from 'react'
-import { StyledResultCard, StyledStatusBadge } from '../../components/styled-components'
+import { StyledResultCard } from '../../components/styled-components'
 import  { Table } from 'react-bootstrap'
 import type { Data } from '../../lib/hook/UseFech'
 
@@ -50,7 +49,7 @@ export default function ResultPage({data}: {data: Data }) {
                         </thead>
 
                         <tbody>
-                            {deuda?.periodos[0].entidades.map((entidades: Entidad, index: number) => (
+                            {deuda.periodos[0].entidades.map((entidades: Entidad, index: number) => (
                             <tr key={index}>
                             <td>{entidades.entidad}</td>
                             <td className='text-center'>{entidades.situacion}</td>
@@ -84,14 +83,14 @@ export default function ResultPage({data}: {data: Data }) {
                   </tr>
                 </thead>
                 <tbody>
-                  {chequesRechazados.map((cheque, index) => (
+                  {/* {chequesRechazados.map((cheque, index) => (
                     <tr key={index}>
                       <td>{cheque.banco}</td>
                       <td>{cheque.fechaEmision}</td>
                       <td className="text-end">{cheque.importe}</td>
                       <td>{cheque.motivoRechazo}</td>
                     </tr>
-                  ))}
+                  ))} */}
                 </tbody>
               </Table>
             </div>

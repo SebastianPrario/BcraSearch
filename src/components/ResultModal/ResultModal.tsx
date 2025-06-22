@@ -3,8 +3,8 @@ import Modal from 'react-bootstrap/Modal'
 
 interface CustomModalProps {
     show: boolean
-    onClose: () => void
     children: React.ReactNode
+    handleClose: () => void
 }
 
 export function ResultModal({ children, show , handleClose}: CustomModalProps) {

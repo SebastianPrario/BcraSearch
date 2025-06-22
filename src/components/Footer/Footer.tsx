@@ -1,5 +1,5 @@
-import React from 'react'
-
+import { StyledFooter } from "../styled-components";
+import { Building2, Phone, Mail, MapPin } from "lucide-react";
 export default function Footer() {
   return (
     <div>

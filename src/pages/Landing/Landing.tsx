@@ -1,29 +1,21 @@
 import type React from "react"
 import { useState } from "react"
-import { Search, Building2, Phone, Mail, MapPin } from "lucide-react"
+import { Search, Building2 } from "lucide-react"
 import {
   StyledNavbar,
   StyledHero,
   StyledCard,
   StyledButton,
   StyledInput,
-  StyledResultCard,
-  StyledBadge,
-  StyledStatusBadge,
-  StyledFooter,
-  StyledAlert,
 } from '../../components/styled-components'
 import UseFech from "../../lib/hook/UseFech"
-import { ListGroup } from "react-bootstrap"
 import { ResultModal } from "../../components/ResultModal/ResultModal"
 import ResultPage from "../ResultPage/ResultPage"
 
 
 export default function Landing() {
   const [cuit, setCuit] = useState("")
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState("")
-  const { data, error: fetchError, loading: fetchLoading, fetchData } = UseFech(cuit)
+  const { data, loading , setLoading, setError,  fetchData } = UseFech()
   const [show, setShow] = useState(false)
   const handleClose = () => setShow(false)
   const validarCuit = (cuit: string) => {
@@ -56,7 +48,7 @@ export default function Landing() {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const valorFormateado = formatearCuit(e.target.value)
     setCuit(valorFormateado)
-    setError("")
+
   }
 
   const handleSubmit = async (e: React.FormEvent) => {

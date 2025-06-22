@@ -20,11 +20,17 @@ interface ChequesRechazados {
 }
 
 interface Entidades {
-    entidad: string
-    situacion: number
-    monto: number
-    enRevision: boolean
-    procesoJud: boolean
+   entidad: string
+        situacion: number
+        fechaSit1: string
+        monto: number
+        diasAtrasoPago: number
+        refinanciaciones: boolean
+        recategorizacionOblig: boolean
+        situacionJuridica: boolean
+        irrecDisposicionTecnica: boolean
+        enRevision: boolean
+        procesoJud: boolean
 }
 interface Periodos {
     periodo: string
@@ -34,12 +40,12 @@ interface Periodos {
 interface Deuda {
     identificacion: string
     denominacion: string
-    periodos: Periodos
+    periodos: [Periodos]
     
 }   
 export interface Data {
     deuda: Deuda
-    chequesRechazados: ChequesRechazados
+    chequesRechazados: [ChequesRechazados] | []
 }
 export default function UseFech() {
     const [data, setData] = React.useState< any | null>(null);
@@ -77,8 +83,9 @@ export default function UseFech() {
                 chequesRechazados: response2.data.results
             }));
             setLoading(false);
-        } catch (err) {
-             setData((prevData: any) => ({
+        } catch (error) {
+             console.error("Error fetching cheques rechazados:", error);
+             setData((prevData: Entidades | null) => ({
                 ...prevData,
                 chequesRechazados: []
             }));
@@ -91,5 +98,5 @@ export default function UseFech() {
 
     console.log("data", data);
   return  {
-    data,error, loading ,fetchData}
+    data,error, setError, loading , setLoading, fetchData}
 }
