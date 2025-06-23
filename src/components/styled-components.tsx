@@ -117,8 +117,12 @@ export const StyledResultCard = styled.div`
   border-radius: 15px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   border-left: 5px solid #28a745;
-  width: 100vh;
-  margin: auto;
+  width: 100%;
+  margin: 0;
+  max-width: 100%;
+  overflow-x: scroll;
+
+
   .card-header {
     background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
     color: white;

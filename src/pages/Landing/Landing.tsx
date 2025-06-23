@@ -68,9 +68,10 @@ export default function Landing() {
     } finally {
       setShow(true)
       setLoading(false)
+      setCuit("") 
     }
   }
-
+  
   return (
     <div className="d-flex flex-column min-vh-100">
       {/* Navbar */}
@@ -78,7 +79,7 @@ export default function Landing() {
         <div className="container">
           <a className="navbar-brand d-flex align-items-center" href="#">
             <Building2 className="me-2" size={32} />
-            ConsultaCUIT
+            ConsultaBCRA
           </a>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span className="navbar-toggler-icon"></span>
@@ -114,7 +115,7 @@ export default function Landing() {
       <StyledHero>
         <div className="container text-center">
           <h1 className="display-4 fw-bold">Consulta de CUIT</h1>
-          <p className="lead">Ingrese el CUIT para obtener información tributaria actualizada</p>
+          <p className="lead">Ingrese el CUIT para obtener información sobre su Situación Bancaria</p>
         </div>
       </StyledHero>
 

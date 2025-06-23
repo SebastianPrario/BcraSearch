@@ -1,6 +1,7 @@
 import { StyledResultCard } from '../../components/styled-components'
-import  { Table } from 'react-bootstrap'
+import  { Card, Table } from 'react-bootstrap'
 import type { Data } from '../../lib/hook/UseFech'
+
 
 interface Entidad {
     entidad: string
@@ -19,25 +20,24 @@ export default function ResultPage({data}: {data: Data }) {
   const { deuda , chequesRechazados} = data
   
   return (
-    <div>
-        
-       <StyledResultCard className="card">
+    <Card>
+      <StyledResultCard>
                   <div className="card-header">
                     <h5 className="mb-1">Resultado de la Consulta</h5>
-                    <small>Información encontrada para el CUIT: {deuda.identificacion}</small>
+                    <small>Información encontrada para el CUIT: {deuda?.identificacion}</small>
                   </div>
                   <div className="card-body">
                  
                     <div className="row mb-4">
-                      <div className="col-md-6">
-                        <div className="mb-3">
+                      <div className="col-md-12">
+                        <div className="mb-0">
                           <strong>Razón Social:</strong>
-                          <p className="text-muted mb-2">{deuda.denominacion}</p>
+                          <p className="text-muted mb-2">{deuda?.denominacion}</p>
                         </div>
                       </div>
                     </div>
-                   <div className="mb-2">
-                      <h6 className="fw-bold border-bottom pb-2 mb-3">Entidades</h6>
+                   <div className="">
+                      <h6 className="fw-bold border-bottom">Entidades</h6>
                        <Table striped>
                         <thead className='text-center'>
                             <tr>
@@ -49,7 +49,7 @@ export default function ResultPage({data}: {data: Data }) {
                         </thead>
 
                         <tbody>
-                            {deuda.periodos[0].entidades.map((entidades: Entidad, index: number) => (
+                            {deuda?.periodos[0].entidades.map((entidades: Entidad, index: number) => (
                             <tr key={index}>
                             <td>{entidades.entidad}</td>
                             <td className='text-center'>{entidades.situacion}</td>
@@ -66,37 +66,45 @@ export default function ResultPage({data}: {data: Data }) {
                   </div>
                 </StyledResultCard>
 
-        {chequesRechazados && chequesRechazados.length > 0 && (
-          <StyledResultCard className="card mt-4">      
+        {chequesRechazados && chequesRechazados.causales.length > 0 && (
+          <StyledResultCard className="card mt-4" >      
             <div className="card-header">
               <h5 className="mb-1">Cheques Rechazados</h5>
-              <small>Información de cheques rechazados para el CUIT: {deuda.identificacion}</small>
+              <small>Información de cheques rechazados para el CUIT: {deuda?.identificacion}</small>
             </div>
-            <div className="card-body">
+            <div className="card-body" style={{ maxHeight: '500px', overflowY: 'auto' }}>
               <Table striped>
                 <thead className='text-center'>
                   <tr>
+                    <th>Motivo</th>
                     <th>Banco</th>
-                    <th>Fecha Emisión</th>
+                    <th>Fecha Rechazo</th>
                     <th>Importe</th>
-                    <th>Motivo Rechazo</th>
+                    <th>Fecha Pago</th>
+                    <th>Fecha Pago Multa</th>
+                    <th>Estado Multa</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {/* {chequesRechazados.map((cheque, index) => (
-                    <tr key={index}>
-                      <td>{cheque.banco}</td>
-                      <td>{cheque.fechaEmision}</td>
-                      <td className="text-end">{cheque.importe}</td>
-                      <td>{cheque.motivoRechazo}</td>
-                    </tr>
-                  ))} */}
+                  {chequesRechazados.causales.map((cheque, index) =>
+                    cheque.entidades.map((detalle, idx) =>
+                      detalle.detalle.map((d, i) => (
+                        <tr key={`${index}-${idx}-${i}`}>
+                          <td>{cheque.causal}</td>
+                          <td>{detalle.entidad}</td>
+                          <td>{d.fechaRechazo}</td>
+                          <td className="text-end">{d.monto}</td>
+                          <td>{d.fechaPago ? d.fechaPago : 'N/A'}</td>
+                          <td>{d.fechaPagoMulta ? d.fechaPagoMulta : 'N/A'}</td>
+                          <td>{d.estadoMulta}</td>
+                        </tr>
+                      ))
+                    )
+                  )}
                 </tbody>
               </Table>
             </div>
-            
-            </StyledResultCard>
-   
-                )}
-    </div>)
+          </StyledResultCard>
+        )}
+    </Card>)
 }

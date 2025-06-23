@@ -1,4 +1,5 @@
 import React from 'react'
+import { Button } from 'react-bootstrap'
 import Modal from 'react-bootstrap/Modal'
 
 interface CustomModalProps {
@@ -15,10 +16,15 @@ export function ResultModal({ children, show , handleClose}: CustomModalProps) {
             centered
             show={show}
         >
-            <div className='p-1'>
-                 <button type="button"  className="btn-close align-items-end" onClick={handleClose} aria-label="Close"></button>
+            <div className="text-end p-1">
+                <Button
+                    type="button"
+                    className="btn-close"
+                    onClick={handleClose}
+                    aria-label="Close"
+                ></Button>
             </div>
-                      <Modal.Body>{children}</Modal.Body>
+            <Modal.Body>{children}</Modal.Body>
         </Modal>
     )
 }

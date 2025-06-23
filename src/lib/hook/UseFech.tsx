@@ -1,22 +1,22 @@
 import axios from 'axios';
 import React from 'react'
 
+interface Causales {
+       nroCheque: number
+        fechaRechazo: string
+        monto: number
+        fechaPago: string | null
+        fechaPagoMulta: string | null
+        estadoMulta: string
+        ctaPersonal: boolean
+        denomJuridica: string
+        enRevision: boolean
+        procesoJud: boolean
+}
 interface ChequesRechazados {
-       entidad: number
-       detalle: [
-              {
-                nroCheque: number
-                fechaRechazo: string
-                monto: number
-                fechaPago: string | null
-                fechaPagoMulta: string | null
-                estadoMulta: string
-                ctaPersonal: boolean
-                denomJuridica: string
-                enRevision: boolean
-                procesoJud: boolean
-              }
-       ]
+        denominacion: string
+        identificacion: string
+        causales: [{ causal: string, entidades : [ {detalle: [Causales], entidad: number}]}]         
 }
 
 interface Entidades {
@@ -44,11 +44,14 @@ interface Deuda {
     
 }   
 export interface Data {
-    deuda: Deuda
-    chequesRechazados: [ChequesRechazados] | []
+    deuda?: Deuda
+    chequesRechazados?: ChequesRechazados | null
 }
+
+
+
 export default function UseFech() {
-    const [data, setData] = React.useState< any | null>(null);
+    const [data, setData] = React.useState<Data | null>(null);
     const [loading, setLoading] = React.useState<boolean>(false);
     const [error, setError] = React.useState<string>("");
   
@@ -71,32 +74,33 @@ export default function UseFech() {
             setError("Error al obtener los datos");
             setLoading(false);
         }
+
         try {
             const response2 = await axios(url2);
+            console.log("Response2:", response2);
             if (!response2) {
                 setError("Error al obtener los cheques rechazados");
                 setLoading(false);
                 return;
             }
-            setData((prevData: any) => ({
+            setData((prevData ) => ({
                 ...prevData,
                 chequesRechazados: response2.data.results
             }));
             setLoading(false);
         } catch (error) {
              console.error("Error fetching cheques rechazados:", error);
-             setData((prevData: Entidades | null) => ({
+            setData((prevData) => ({
                 ...prevData,
-                chequesRechazados: []
-            }));
+                chequesRechazados: null})
+            );
             setError("Error al obtener los cheques rechazados");
             setLoading(false);
         }
        
     }
-
-
-    console.log("data", data);
+    
+  
   return  {
     data,error, setError, loading , setLoading, fetchData}
 }
