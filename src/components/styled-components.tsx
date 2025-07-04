@@ -1,16 +1,14 @@
-"use client"
-
 import styled from "styled-components"
 
 export const StyledNavbar = styled.nav`
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  
+  border-radius: 20px;
   .navbar-brand {
     font-weight: 700;
     font-size: 1.5rem;
     color: white !important;
-    
+       
     &:hover {
       color: #f8f9fa !important;
     }
@@ -31,21 +29,20 @@ export const StyledNavbar = styled.nav`
 
 export const StyledHero = styled.div`
   background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-  padding: 4rem 0;
+  padding: 1rem 0;
+  border-radius: 20px;
+  margin-bottom: 0;
   
   h1 {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    background-clip: text;
-    font-weight: 800;
-    margin-bottom: 1.5rem;
-  }
+    margin-bottom: 1.0rem;  }
   
   p {
     color: #6c757d;
-    font-size: 1.2rem;
-    font-weight: 300;
+    font-size: 0.9rem;
+    font-weight: 150;
   }
 `
 
@@ -165,7 +162,8 @@ export const StyledStatusBadge = styled.span<{ status: string }>`
 export const StyledFooter = styled.footer`
   background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
   color: white;
-  
+  margin-left: 0;
+  border-radius: 20px;
   h5 {
     color: #ecf0f1;
     font-weight: 600;

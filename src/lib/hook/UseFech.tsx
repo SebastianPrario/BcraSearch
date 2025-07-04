@@ -60,6 +60,7 @@ export default function UseFech() {
         const url = `https://api.bcra.gob.ar/CentralDeDeudores/V1.0/Deudas/${cuit}`;
         const url2 = `https://api.bcra.gob.ar/CentralDeDeudores/V1.0/Deudas/ChequesRechazados/${cuit}`;
         try{
+        setData(null)
         setLoading(true)
         const response  = await axios(url);
         if (!response) { 

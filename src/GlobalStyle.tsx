@@ -1,7 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 export const GlobalStyle = createGlobalStyle`
   :root {
-    --color-principal: #6200ea;
+    --color-principal: #d6c6c6;
   }
 
   * {
@@ -12,11 +12,13 @@ export const GlobalStyle = createGlobalStyle`
 
   body {
     font-family: 'Segoe UI', sans-serif;
-    background-color: #dfd0d0;
-    color: #333;
+    background-color: #d3cfcf;
+    color: #812525;
     display: flex;
     flex-direction: column;
-    width: 100%;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
   }
 
   a {
