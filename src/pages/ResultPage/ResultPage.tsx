@@ -1,6 +1,7 @@
 import { StyledResultCard } from '../../components/styled-components'
 import  { Card, Table } from 'react-bootstrap'
 import type { Data } from '../../lib/hook/UseFech'
+import { formatearImporte } from '../../lib/helpers/formaterImporte'
 
 
 interface Entidad {
@@ -24,7 +25,7 @@ export default function ResultPage({data}: {data: Data }) {
       <StyledResultCard>
                   <div className="card-header">
                     <h5 className="mb-1">Resultado de la Consulta</h5>
-                    <small>Información encontrada para el CUIT: {deuda?.identificacion}</small>
+                    <small>Información encontrada para la CUIT: {deuda?.identificacion}</small>
                   </div>
                   <div className="card-body">
                  
@@ -43,7 +44,7 @@ export default function ResultPage({data}: {data: Data }) {
                             <tr>
                             <th className='text-center'>Banco</th>
                             <th className='text-start'>Situación</th>
-                            <th className='text-start'>Importe</th>
+                            <th className='text-center'>Importe</th>
                             <th className='text-start'>Dias Atraso</th>
                             </tr>
                         </thead>
@@ -53,7 +54,7 @@ export default function ResultPage({data}: {data: Data }) {
                             <tr key={index}>
                             <td>{entidades.entidad}</td>
                             <td className='text-center'>{entidades.situacion}</td>
-                            <td className="text-end">{entidades.monto}</td>
+                            <td className="text-end">{formatearImporte(entidades.monto*1000)}</td>
                             <td className="text-center">{entidades.diasAtrasoPago}</td>
                             </tr>
                             ))}
@@ -70,7 +71,7 @@ export default function ResultPage({data}: {data: Data }) {
           <StyledResultCard className="card mt-4" >      
             <div className="card-header">
               <h5 className="mb-1">Cheques Rechazados</h5>
-              <small>Información de cheques rechazados para el CUIT: {deuda?.identificacion}</small>
+              <small>Información de cheques rechazados para la CUIT: {deuda?.identificacion}</small>
             </div>
             <div className="card-body" style={{ maxHeight: '500px', overflowY: 'auto' }}>
               <Table striped>
@@ -78,6 +79,7 @@ export default function ResultPage({data}: {data: Data }) {
                   <tr>
                     <th>Motivo</th>
                     <th>Banco</th>
+                    <th>Numero</th>
                     <th>Fecha Rechazo</th>
                     <th>Importe</th>
                     <th>Fecha Pago</th>
@@ -89,11 +91,12 @@ export default function ResultPage({data}: {data: Data }) {
                   {chequesRechazados.causales.map((cheque, index) =>
                     cheque.entidades.map((detalle, idx) =>
                       detalle.detalle.map((d, i) => (
-                        <tr key={`${index}-${idx}-${i}`}>
+                        <tr  className='text-end' key={`${index}-${idx}-${i}`}>
                           <td>{cheque.causal}</td>
                           <td>{detalle.entidad}</td>
+                          <td className='text-end'>{d.nroCheque}</td> 
                           <td>{d.fechaRechazo}</td>
-                          <td className="text-end">{d.monto}</td>
+                          <td className="text-end">{formatearImporte(d.monto)}</td>
                           <td>{d.fechaPago ? d.fechaPago : 'N/A'}</td>
                           <td>{d.fechaPagoMulta ? d.fechaPagoMulta : 'N/A'}</td>
                           <td>{d.estadoMulta}</td>
