@@ -40,8 +40,8 @@ export const StyledHero = styled.div`
     margin-bottom: 1.0rem;  }
   
   p {
-    color: #6c757d;
-    font-size: 0.9rem;
+    color: #1e1e1e;
+    font-size: 1.2rem;
     font-weight: 150;
   }
 `
@@ -110,18 +110,16 @@ export const StyledInput = styled.input`
 `
 
 export const StyledResultCard = styled.div`
-  border: none;
-  border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  border-left: 5px solid #28a745;
+  border: 2px, 2px, 2px, 2px  solid #667eea 0%;
+  border-radius: 15px 15px 0 0 !important;
   width: 100%;
   margin: 0;
   max-width: 100%;
   overflow-x: scroll;
-
+  
 
   .card-header {
-    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
     border-radius: 15px 15px 0 0 !important;
     border: none;
@@ -160,7 +158,7 @@ export const StyledStatusBadge = styled.span<{ status: string }>`
 `
 
 export const StyledFooter = styled.footer`
-  background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
   margin-left: 0;
   border-radius: 20px;

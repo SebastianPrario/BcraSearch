@@ -8,7 +8,7 @@ export default function NavBar() {
         <div className="container">
           <a className="navbar-brand d-flex align-items-center" href="#">
             <Building2 className="me-2" size={32} />
-            ConsultaBCRA
+            Consultas BCRA
           </a>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span className="navbar-toggler-icon"></span>

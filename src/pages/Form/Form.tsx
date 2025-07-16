@@ -17,7 +17,7 @@ const Form: React.FC<FormComponentProps> = ({ handleSubmit, cuit, handleInputCha
           <Search className="me-2" size={20} />
           Consultar CUIT
         </h5>
-        <small>Ingrese el CUIT en formato XX-XXXXXXXX-X o solo números</small>
+        <small>Ingrese la CUIT en formato XX-XXXXXXXX-X o solo números</small>
       </div>
       <div className="card-body">
         <form onSubmit={handleSubmit}>
