@@ -78,7 +78,6 @@ export default function UseFech() {
 
         try {
             const response2 = await axios(url2);
-            console.log("Response2:", response2);
             if (!response2) {
                 setError("Error al obtener los cheques rechazados");
                 setLoading(false);

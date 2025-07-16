@@ -60,8 +60,8 @@ export default function Landing() {
       <NavBar/>
       <StyledHero>
         <div className="container text-center  p-0 m-0">
-          <h1 className="display-5 fw-bold">Consulta de CUIT</h1>
-          <p className="lead">Ingrese el CUIT para obtener información sobre su Situación Bancaria</p>
+          <h1 className="display-5 fw-bold">Reporte de Situación Crediticia</h1>
+          <p className="lead">Ingrese la CUIT para obtener información sobre su Situación Bancaria</p>
         </div>
       </StyledHero>
       <main className="flex-grow-1 py-3">
@@ -79,9 +79,12 @@ export default function Landing() {
                 <ResultModal 
                   show={show}
                   handleClose={handleClose}>
-                  <ResultPage
-                  data={data}
+                  {({ content }) => (
+                    <ResultPage
+                    data={data}
+                    content={content}
                   />
+                  )}
                 </ResultModal>
               )}
               
