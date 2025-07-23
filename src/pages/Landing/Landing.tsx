@@ -11,22 +11,13 @@ import Form from "../Form/Form"
 import { formatearCuit } from "../../lib/helpers/formatearCuit"
 import Footer from "../../components/Footer/Footer"
 import { Container } from "react-bootstrap"
-
+import { validarCuit } from "../../lib/helpers/validarCuit"
 
 export default function Landing() {
   const [cuit, setCuit] = useState("")
   const { data, loading , setLoading, setError,  fetchData } = UseFech()
   const [show, setShow] = useState(false)
   const handleClose = () => setShow(false)
-  const validarCuit = (cuit: string) => {
-    const cuitLimpio = cuit.replace(/[-\s]/g, "")
-    if (cuitLimpio.length !== 11 || !/^\d+$/.test(cuitLimpio)) {
-      return false
-    }
-    return true
-  }
-
-
  
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const valorFormateado = formatearCuit(e.target.value)
@@ -57,6 +48,7 @@ export default function Landing() {
   
   return (
     <Container className="d-flex flex-column container-fluid">
+    
       <NavBar/>
       <StyledHero>
         <div className="container text-center  p-0 m-0">
