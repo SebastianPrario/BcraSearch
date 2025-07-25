@@ -52,7 +52,7 @@ export default function Landing() {
       <NavBar/>
       <StyledHero>
         <div className="container text-center  p-0 m-0">
-          <h1 className="display-5 fw-bold">Reporte de Situación Crediticia</h1>
+          <h1 className="display-5 fw-bold">Cheques Rechazados y Deuda Bancaria</h1>
           <p className="lead">Ingrese la CUIT para obtener información sobre su Situación Bancaria</p>
         </div>
       </StyledHero>
