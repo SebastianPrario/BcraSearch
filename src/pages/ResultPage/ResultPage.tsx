@@ -1,14 +1,43 @@
+import React from 'react'
 import { StyledResultCard } from '../../components/styled-components'
 import  {  Card, Table } from 'react-bootstrap'
+import type { Data } from '../../lib/hook/UseFech'
 import { formatearImporte } from '../../lib/helpers/formaterImporte'
-import { total } from '../../lib/helpers/importeTotal'
-import type  {  ResultPageProps, Entidad } from '../../types/api'
 
 
-
+interface Entidad {
+    entidad: string
+        situacion: number
+        fechaSit1: string
+        monto: number
+        diasAtrasoPago: number
+        refinanciaciones: boolean
+        recategorizacionOblig: boolean
+        situacionJuridica: boolean
+        irrecDisposicionTecnica: boolean
+        enRevision: boolean
+        procesoJud: boolean
+}
+interface ResultPageProps {
+  data: Data;
+  content: React.RefObject<HTMLDivElement | null > | null;
+}
 export default function ResultPage ({data, content}: ResultPageProps) {
   const { deuda , chequesRechazados} = data
-  
+ 
+  const total = () => {
+    let total = 0;
+    let cantidad = 0
+    {chequesRechazados?.causales.map((cheque: { entidades: any[] }) =>
+                    cheque.entidades.map((entidad) =>
+                      entidad.detalle.map((d: any) => {
+                        total += d.monto
+                        cantidad += 1
+                      })
+                    )
+                  )}
+    return {total, cantidad}
+  }
   return (
    
     <div ref={content}>
@@ -56,22 +85,12 @@ export default function ResultPage ({data, content}: ResultPageProps) {
                   </div>
                 </StyledResultCard>
 
-        {chequesRechazados?.causales === undefined ? 
-          (<StyledResultCard className="card mt-4">
-            <div className="card-header">
-              <h5 className="mb-1">Información de Cheques Rechazados para la CUIT: {deuda?.identificacion}</h5>
-             
-            </div>
-            <div className="card-body">
-              <p className="text-muted mb-2">No se encontraron cheques rechazados para la CUIT: {deuda?.identificacion}</p> 
-            </div> 
-          </StyledResultCard>)
-          : (
+        {chequesRechazados && chequesRechazados.causales.length > 0 && (
           <StyledResultCard className="card mt-4" >      
             <div className="card-header">
               <h5 className="mb-1">Información de Cheques Rechazados para la CUIT: {deuda?.identificacion}</h5>
-              <small className='me-2'>Importe Total en Cheques Rechazados: <b>{formatearImporte(total(chequesRechazados).total)}</b></small>
-              <small>Cantidad de Cheques Rechazados: <b>{total(chequesRechazados).cantidad}</b> cheques</small>
+              <small className='me-2'>Importe Total en Cheques Rechazados: <b>{formatearImporte(total().total)}</b></small>
+              <small>Cantidad de Cheques Rechazados: <b>{total().cantidad}</b> cheques</small>
             </div>
             <div className="card-body" style={{ maxHeight: '500px', overflowY: 'auto' }}>
               <Table responsive striped bordered hover  size="sm" style={{ tableLayout: 'fixed' }}>
@@ -87,7 +106,7 @@ export default function ResultPage ({data, content}: ResultPageProps) {
                     </tr>
                 </thead>
                 <tbody>
-                  {chequesRechazados?.causales.map((cheque, index) =>
+                  {chequesRechazados.causales.map((cheque, index) =>
                     cheque.entidades.map((entidad, idx) =>
                       entidad.detalle.map((d, i) => (
                         <tr  className='text-end' key={`${index}-${idx}-${i}`}>

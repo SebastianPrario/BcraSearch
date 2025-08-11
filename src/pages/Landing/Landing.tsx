@@ -18,7 +18,6 @@ export default function Landing() {
   const { data, loading , setLoading, setError,  fetchData } = UseFech()
   const [show, setShow] = useState(false)
   const handleClose = () => setShow(false)
- 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const valorFormateado = formatearCuit(e.target.value)
     setCuit(valorFormateado)

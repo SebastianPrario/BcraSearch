@@ -23,14 +23,14 @@ export default function UseFech() {
             axios(url2)
         ])
         if (deudaResult.status === 'fulfilled') {
-            setData( { deuda: deudaResult.value.data.results , chequesRechazados: null });
+            setData( { deuda: deudaResult.value.data.results , chequesRechazados: null })};
         if (chequesRechazadosResult.status === 'fulfilled') {
             setData((prevData) => ({
                 ...prevData,
                 chequesRechazados: chequesRechazadosResult.value.data.results
             }));
         }
-        } else {
+         else {
             setError("Error al obtener los datos de deuda");    
         }
                      

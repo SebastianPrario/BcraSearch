@@ -47,6 +47,6 @@ export interface Deuda {
     
 }   
 export interface Data {
-    deuda?: Deuda
+    deuda?: Deuda | null
     chequesRechazados?: ChequesRechazados | null
 }
