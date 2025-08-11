@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyledResultCard } from '../../components/styled-components'
 import  {  Card, Table } from 'react-bootstrap'
-import type { Data } from '../../lib/hook/UseFech'
+import type { Data } from '../../types/api'
 import { formatearImporte } from '../../lib/helpers/formaterImporte'
 
 
@@ -107,7 +107,7 @@ export default function ResultPage ({data, content}: ResultPageProps) {
                 </thead>
                 <tbody>
                   {chequesRechazados.causales.map((cheque, index) =>
-                    cheque.entidades.map((entidad, idx) =>
+                    cheque?.entidades.map((entidad, idx) =>
                       entidad.detalle.map((d, i) => (
                         <tr  className='text-end' key={`${index}-${idx}-${i}`}>
                           <td>{cheque.causal}</td>
