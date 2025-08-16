@@ -28,12 +28,25 @@ export interface Causales {
         enRevision: boolean
         procesoJud: boolean
 }
-export interface ChequesRechazados {
-        denominacion: string
-        identificacion: string
-        causales: [{ causal: string, entidades : [ {detalle: [Causales], entidad: number}]}]         
+export interface Cheque {
+  causal: string;
+  entidades: {
+    entidad: string;
+    detalle: {
+      nroCheque: number;
+      fechaRechazo: string;
+      monto: number;
+      fechaPago: string | null;
+      fechaPagoMulta: string | null;
+      estadoMulta: string;
+    }[];
+  }[];
 }
 
+export interface ChequesRechazados {
+  identificacion: number
+  causales: Cheque[];
+}
 
 export interface Periodos {
     periodo: string

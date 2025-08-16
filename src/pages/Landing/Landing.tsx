@@ -23,7 +23,7 @@ export default function Landing() {
     setCuit(valorFormateado)
 
   }
-
+  
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!validarCuit(cuit)) {
@@ -66,7 +66,7 @@ export default function Landing() {
               loading = {loading}
               />
             </div>
-              {data && (
+              {data ? (
                 <ResultModal 
                   show={show}
                   handleClose={handleClose}>
@@ -77,7 +77,7 @@ export default function Landing() {
                   />
                   )}
                 </ResultModal>
-              )}
+              ): <>no hay datos para esta consulta</>}
               
            </div>
           <Footer/>
