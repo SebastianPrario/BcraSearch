@@ -11,7 +11,7 @@ export default function Footer() {
               <Row className="d-flex flex-row m-auto">
               <div className="mb-2 col-lg-12">
                 <Mail className="me-2" size={16} />
-                <span>info@chequesrechazados.com.ar</span>
+                <span>chequesrechazados@icloud.com</span>
               </div>
               <div className="mb-2 col-lg-12">
                 <MapPin className="me-2" size={16} />
