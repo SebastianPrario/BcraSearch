@@ -295,3 +295,75 @@ export const MobileDataCard = styled.div`
   }
 `
 
+export const StyledFeedbackWidget = styled.div`
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 1000;
+
+  @media (max-width: 767px) {
+    bottom: 1rem;
+    right: 1rem;
+  }
+`
+
+export const FeedbackButton = styled.button`
+  background: var(--primary);
+  color: white;
+  border: none;
+  width: 56px;
+  height: 56px;
+  border-radius: 28px;
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    transform: scale(1.1);
+    background: var(--accent);
+  }
+`
+
+export const FeedbackCard = styled.div`
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: var(--shadow-lg);
+  padding: 1.5rem;
+  width: 300px;
+  position: absolute;
+  bottom: 70px;
+  right: 0;
+  
+  h6 {
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+
+  textarea {
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.75rem;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    resize: none;
+    height: 100px;
+
+    &:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+  }
+
+  .stars {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    color: #fbbf24;
+    cursor: pointer;
+  }
+`
+
