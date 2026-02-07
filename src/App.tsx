@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { GlobalStyle } from './GlobalStyle'
 import Landing from './pages/Landing/Landing'
 import { ThemeProvider } from './context/ThemeContext'
