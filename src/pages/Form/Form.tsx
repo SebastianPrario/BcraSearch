@@ -11,39 +11,41 @@ interface FormComponentProps {
 
 const Form: React.FC<FormComponentProps> = ({ handleSubmit, cuit, handleInputChange, loading }) => {
   return (
-    <StyledCard className="card mb-4">
+    <StyledCard className="mb-4">
       <div className="card-header">
         <h5 className="d-flex align-items-center mb-1">
-          <Search className="me-2" size={20} />
-          Consultar CUIT
+          <Search className="me-2 text-primary" size={24} />
+          Consultar Situación Bancaria
         </h5>
-        <small>Ingrese la CUIT en formato XX-XXXXXXXX-X o solo números</small>
+        <small>Ingrese el CUIT para obtener el reporte consolidado</small>
       </div>
       <div className="card-body">
         <form onSubmit={handleSubmit}>
-          <div className="mb-3">
-            <label htmlFor="cuit" className="form-label fw-semibold">
-              CUIT
+          <div className="mb-4">
+            <label htmlFor="cuit" className="form-label fw-bold" style={{ color: 'var(--text-dim)', fontSize: '0.875rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+              Número de CUIT
             </label>
             <StyledInput
               type="text"
-              className="form-control form-control-lg"
               id="cuit"
-              placeholder="20-12345678-9"
+              placeholder="Ej: 20-12345678-9"
               value={cuit}
               onChange={handleInputChange}
               maxLength={13}
             />
           </div>
-          <div className="d-grid">
-            <StyledButton type="submit" className="btn btn-primary btn-lg" disabled={loading || !cuit}>
+          <div className="d-grid mt-2">
+            <StyledButton type="submit" disabled={loading || !cuit}>
               {loading ? (
                 <>
-                  <span className="spinner-border spinner-border-sm me-2" role="status"></span>
-                  Consultando...
+                  <span className="spinner-border spinner-border-sm" role="status"></span>
+                  Procesando...
                 </>
               ) : (
-                "Consultar CUIT"
+                <>
+                  <Search size={18} />
+                  Consultar Ahora
+                </>
               )}
             </StyledButton>
           </div>

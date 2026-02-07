@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyledResultCard, DesktopContainer, MobileContainer, MobileDataCard } from '../../components/styled-components'
-import { Card, Table } from 'react-bootstrap'
+import { Card } from 'react-bootstrap'
 import type { Data, Cheque } from '../../types/api'
 import { formatearImporte } from '../../lib/helpers/formaterImporte'
 import ResultCard from '../../components/ResultCard/ResultCard'
@@ -41,16 +41,18 @@ export default function ResultPage({ data, content }: ResultPageProps) {
   return (
 
     <div ref={content}>
-      <Card style={{ borderRadius: '15px', border: 'none', background: 'transparent' }}>
-        {deuda && <StyledResultCard className="card">
-          <div className="card-header">
-            <small>Información encontrada para la CUIT: {deuda?.identificacion}</small>
-          </div>
-          {<ResultCard deuda={deuda} />}
-        </StyledResultCard>}
+      <Card style={{ background: 'transparent', border: 'none' }}>
+        {deuda && (
+          <StyledResultCard>
+            <div className="card-header">
+              <small style={{ opacity: 0.8 }}>Reporte consolidado para la identificación: {deuda?.identificacion}</small>
+            </div>
+            <ResultCard deuda={deuda} />
+          </StyledResultCard>
+        )}
 
         {chequesRechazados && chequesRechazados.causales.length > 0 && (
-          <StyledResultCard className="card mt-4" >
+          <StyledResultCard className="mt-4">
             <div className="card-header">
               <h5 className="mb-1">Cheques Rechazados</h5>
               <div className="d-flex flex-wrap gap-2">
@@ -60,36 +62,34 @@ export default function ResultPage({ data, content }: ResultPageProps) {
             </div>
             <div className="card-body">
               <DesktopContainer>
-                <div style={{ maxHeight: '500px', overflowY: 'auto' }}>
-                  <Table responsive striped bordered hover size="sm">
-                    <thead className='text-center'>
-                      <tr>
-                        <th>Motivo</th>
-                        <th>Numero</th>
-                        <th>Fecha Rechazo</th>
-                        <th>Importe</th>
-                        <th>Fecha Pago</th>
-                        <th>Estado Multa</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {chequesRechazados.causales.map((cheque, index) =>
-                        cheque?.entidades.map((entidad, idx) =>
-                          entidad.detalle.map((d, i) => (
-                            <tr className='text-end' key={`${index}-${idx}-${i}`}>
-                              <td className="text-start">{cheque.causal}</td>
-                              <td>{d.nroCheque}</td>
-                              <td>{d.fechaRechazo}</td>
-                              <td className="text-end fw-bold">{formatearImporte(d.monto)}</td>
-                              <td>{d.fechaPago ? d.fechaPago : 'N/A'}</td>
-                              <td>{d.estadoMulta}</td>
-                            </tr>
-                          ))
-                        )
-                      )}
-                    </tbody>
-                  </Table>
-                </div>
+                <table>
+                  <thead className='text-center'>
+                    <tr>
+                      <th>Motivo</th>
+                      <th>Numero</th>
+                      <th>Fecha Rechazo</th>
+                      <th>Importe</th>
+                      <th>Fecha Pago</th>
+                      <th>Estado Multa</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {chequesRechazados.causales.map((cheque, index) =>
+                      cheque?.entidades.map((entidad, idx) =>
+                        entidad.detalle.map((d, i) => (
+                          <tr className='text-end' key={`${index}-${idx}-${i}`}>
+                            <td className="text-start">{cheque.causal}</td>
+                            <td>{d.nroCheque}</td>
+                            <td>{d.fechaRechazo}</td>
+                            <td className="text-end fw-bold" style={{ color: 'var(--secondary)' }}>{formatearImporte(d.monto)}</td>
+                            <td>{d.fechaPago ? d.fechaPago : 'N/A'}</td>
+                            <td>{d.estadoMulta}</td>
+                          </tr>
+                        ))
+                      )
+                    )}
+                  </tbody>
+                </table>
               </DesktopContainer>
 
               <MobileContainer>
@@ -98,7 +98,7 @@ export default function ResultPage({ data, content }: ResultPageProps) {
                     entidad.detalle.map((d, i) => (
                       <MobileDataCard key={`${index}-${idx}-${i}`}>
                         <div className="data-row">
-                          <span className="label">Motivo</span>
+                          <span className="label" data-definition="Motivo por el cual el cheque fue rechazado por la entidad financiera.">Causal</span>
                           <span className="value">{cheque.causal}</span>
                         </div>
                         <div className="data-row">
@@ -111,10 +111,10 @@ export default function ResultPage({ data, content }: ResultPageProps) {
                         </div>
                         <div className="data-row">
                           <span className="label">Importe</span>
-                          <span className="value fw-bold">{formatearImporte(d.monto)}</span>
+                          <span className="value fw-bold" style={{ color: 'var(--secondary)' }}>{formatearImporte(d.monto)}</span>
                         </div>
                         <div className="data-row">
-                          <span className="label">Estado Multa</span>
+                          <span className="label" data-definition="Estado actual de la multa correspondiente al rechazo.">Estado Multa</span>
                           <span className="value">{d.estadoMulta}</span>
                         </div>
                       </MobileDataCard>
