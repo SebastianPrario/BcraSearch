@@ -687,3 +687,106 @@ export const StyledHistoryItem = styled.button`
     font-style: italic;
   }
 `
+
+export const GCheqButton = styled.button`
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  border: none;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.2);
+  width: 100%;
+
+  @media (min-width: 768px) {
+    width: auto;
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.4);
+    filter: brightness(1.1);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  svg {
+    filter: drop-shadow(0 0 2px rgba(0,0,0,0.2));
+  }
+`;
+
+export const GCheqModalStyles = styled.div`
+  .feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+    padding: 1rem;
+    background: rgba(var(--primary-rgb), 0.05);
+    border-radius: 16px;
+    border: 1px solid var(--glass-border);
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: rgba(var(--primary-rgb), 0.08);
+      transform: translateX(5px);
+    }
+
+    .icon-wrapper {
+      background: var(--primary);
+      color: white;
+      padding: 0.5rem;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .content {
+      h6 {
+        margin: 0 0 0.25rem 0;
+        font-weight: 700;
+        color: var(--text-main);
+      }
+      p {
+        margin: 0;
+        font-size: 0.9rem;
+        color: var(--text-dim);
+        line-height: 1.4;
+      }
+    }
+  }
+
+  .cta-section {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, rgba(var(--primary-rgb), 0.1) 0%, rgba(236, 72, 153, 0.1) 100%);
+    border-radius: 20px;
+    text-align: center;
+    border: 1px solid var(--glass-border);
+
+    h5 {
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(to right, #818cf8, #f472b6);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    p {
+      color: var(--text-dim);
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+    }
+  }
+`;
