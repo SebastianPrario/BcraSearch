@@ -38,6 +38,10 @@ export default function ResultPage({ data, content }: ResultPageProps) {
 
     return { total, cantidad };
   }
+  function formatearcuit(identificacion: string): React.ReactNode {
+    throw new Error('Function not implemented.')
+  }
+
   return (
 
     <div ref={content}>

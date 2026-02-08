@@ -121,7 +121,7 @@ export const StyledCard = styled.div`
   }
   
   .card-header {
-    background: rgba(0, 0, 0, 0.05);
+    background: rgba(241, 234, 234, 0.05);
     padding: 1.25rem 1.5rem; /* Base móvil */
     border-bottom: 1px solid var(--glass-border);
 
@@ -259,6 +259,7 @@ export const StyledResultCard = styled.div`
     background: rgba(15, 23, 42, 0.3);
     padding: 1.25rem 1.5rem;
     border-bottom: 1px solid var(--glass-border);
+    color: var(--text-main);
 
     @media (min-width: 768px) {
       padding: 1.5rem 2rem;

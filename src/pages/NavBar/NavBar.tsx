@@ -16,6 +16,18 @@ export default function NavBar() {
         </a>
 
         <div className="d-flex align-items-center gap-3">
+           <div className="d-none d-lg-flex justify-content-center mb-2">
+            <GCheqButton onClick={() => setShowGCheq(true)}>
+              <LayoutDashboard size={20} />
+              NUEVO!!! APP para Gestión de Cheques
+            </GCheqButton>
+            </div>
+             <div className="d-lg-none">
+            <GCheqButton onClick={() => setShowGCheq(true)}>
+              GCheq
+            </GCheqButton>
+            </div>
+           
           <button
             onClick={toggleTheme}
             className="btn btn-link me-4 text-decoration-none"
@@ -24,18 +36,14 @@ export default function NavBar() {
           >
             {theme === 'light' ? <Moon size={24} /> : <Sun size={24} />}
           </button>
-       <div className="d-flex justify-content-center mb-2">
-            <GCheqButton onClick={() => setShowGCheq(true)}>
-              <LayoutDashboard size={20} />
-              NUEVO!!! APP para Gestión de Cheques
-            </GCheqButton>
+         
           </div>
           <GCheqModal
             show={showGCheq}
             handleClose={() => setShowGCheq(false)}
           />
         </div>
-      </div>
+    
     </StyledNavbar>
   )
 }
