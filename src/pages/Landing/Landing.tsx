@@ -4,7 +4,6 @@ import {
   StyledHero,
   StyledHistoryList,
   StyledHistoryItem,
-  GCheqButton
 } from '../../components/styled-components'
 import UseFech from "../../lib/hook/UseFech"
 import { ResultModal } from "../../components/ResultModal/ResultModal"
@@ -13,12 +12,11 @@ import NavBar from "../NavBar/NavBar"
 import Form from "../Form/Form"
 import { formatearCuit } from "../../lib/helpers/formatearCuit"
 import Footer from "../../components/Footer/Footer"
-import { GCheqModal } from "../../components/GCheqModal/GCheqModal"
 import { Container } from "react-bootstrap"
 import { validarCuit } from "../../lib/helpers/validarCuit"
 import FeedbackWidget from "../../components/FeedbackWidget/FeedbackWidget"
 import { useSearchHistory } from "../../lib/hook/useSearchHistory"
-import { Clock, LayoutDashboard } from "lucide-react"
+import { Clock } from "lucide-react"
 
 export default function Landing() {
   const [cuit, setCuit] = useState("")
