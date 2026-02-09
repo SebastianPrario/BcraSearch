@@ -74,8 +74,8 @@ export default function Landing() {
       <NavBar />
       <StyledHero>
         <div className="container text-center  p-0 m-0">
-          <h1 className="display-5 fw-bold">Cheques Rechazados y Deuda Bancaria</h1>
-          <p className="lead mb-4">Ingrese la CUIT para obtener información sobre su Situación Bancaria</p>
+          <h1 className="display-5 fw-bold">Consulta Cheques Rechazados y Deuda Bancaria BCRA</h1>
+          <p className="lead mb-4">Consulta GRATIS por CUIT la Central de Deudores y Cheques Rechazados del Banco Central</p>
         </div>
       </StyledHero>
       <main className="flex-grow-1 py-3">
