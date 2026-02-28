@@ -17,12 +17,13 @@ import { validarCuit } from "../../lib/helpers/validarCuit"
 import FeedbackWidget from "../../components/FeedbackWidget/FeedbackWidget"
 import { useSearchHistory } from "../../lib/hook/useSearchHistory"
 import { Clock } from "lucide-react"
+import { FAQ } from "../../components/FAQ"
 
 export default function Landing() {
   const [cuit, setCuit] = useState("")
   const { data, setData, loading, setLoading, setError, fetchData } = UseFech()
   const [show, setShow] = useState(false)
-  const { history, addToHistory } = useSearchHistory()
+  const { history: searchHistory, addToHistory } = useSearchHistory()
 
   const handleClose = () => setShow(false)
 
@@ -70,42 +71,52 @@ export default function Landing() {
   }
 
   return (
-    <Container className="d-flex flex-column container-fluid">
+    <Container className="d-flex flex-column container-fluid" style={{ minHeight: '100vh', position: 'relative', zIndex: 1 }}>
       <NavBar />
-      <StyledHero>
-        <div className="container text-center  p-0 m-0">
-          <h1 className="display-5 fw-bold">Consulta Cheques Rechazados y Deuda Bancaria BCRA</h1>
-          <p className="lead mb-4">Consulta GRATIS por CUIT la Central de Deudores y Cheques Rechazados del Banco Central</p>
-        </div>
-      </StyledHero>
-      <main className="flex-grow-1 py-3">
-        <div className="container">
+      <main className="flex-grow-1">
+        <StyledHero>
+          <div className="container px-4">
+            <h1>Consulta de Situación <br /><span style={{ background: 'linear-gradient(135deg, var(--primary), var(--secondary))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Financiera & Bancaria</span></h1>
+            <p className="mx-auto">
+              Obtenga informes detallados sobre deudas bancarias y cheques rechazados en segundos. Información directa del Banco Central de la República Argentina.
+            </p>
+          </div>
+        </StyledHero>
+
+        <div className="container pb-5" style={{ marginTop: '-1rem' }}>
           <div className="row justify-content-center">
             <div className="col-lg-8">
-              <Form
-                handleSubmit={handleSubmit}
-                cuit={cuit}
-                handleInputChange={handleInputChange}
-                loading={loading}
-              />
+              <div style={{ position: 'relative' }}>
+                <Form
+                  handleSubmit={handleSubmit}
+                  cuit={cuit}
+                  handleInputChange={handleInputChange}
+                  loading={loading}
+                />
+              </div>
 
-              {history.length > 0 && (
+              {searchHistory.length > 0 && (
                 <StyledHistoryList>
-                  <div className="d-flex align-items-center gap-2 mb-2 px-1">
-                    <Clock size={16} style={{ color: 'var(--text-dim)' }} />
-                    <span style={{ color: 'var(--text-dim)', fontWeight: 'bold', fontSize: '0.75rem', textTransform: 'uppercase' }}>Consultas Recientes</span>
+                  <div className="d-flex align-items-center gap-2 mb-3 mt-4 px-1">
+                    <Clock size={16} style={{ color: 'var(--primary)' }} />
+                    <span style={{ color: 'var(--text-dim)', fontWeight: '700', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Consultas Recientes</span>
                   </div>
-                  {history.map((item) => (
-                    <StyledHistoryItem key={item.cuit} onClick={() => handleHistoryClick(item.data)}>
-                      <div className="info">
-                        <span className="name">{item.denominacion}</span>
-                        <span className="cuit">{formatearCuit(item.cuit)}</span>
+                  <div className="row g-3">
+                    {searchHistory.slice(0, 3).map((item) => (
+                      <div className="col-md-4" key={item.cuit}>
+                        <StyledHistoryItem onClick={() => handleHistoryClick(item.data)} style={{ height: '100%' }}>
+                          <div className="info">
+                            <span className="name text-truncate" style={{ maxWidth: '150px' }}>{item.denominacion}</span>
+                            <span className="cuit">{formatearCuit(item.cuit)}</span>
+                          </div>
+                        </StyledHistoryItem>
                       </div>
-                      <span className="date">Hace momentos</span>
-                    </StyledHistoryItem>
-                  ))}
+                    ))}
+                  </div>
                 </StyledHistoryList>
               )}
+
+              <FAQ />
             </div>
 
             {data && (
@@ -125,6 +136,6 @@ export default function Landing() {
         </div>
       </main>
       <FeedbackWidget />
-    </Container>
+    </Container >
   )
 }

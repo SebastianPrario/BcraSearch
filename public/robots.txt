@@ -1,11 +1,4 @@
 User-agent: *
 Allow: /
 
-# Sitemap
 Sitemap: https://chequesrechazados.com.ar/sitemap.xml
-
-# Bloquear archivos innecesarios
-Disallow: /node_modules/
-Disallow: /*.json$
-Disallow: /*.config.js$
-Disallow: /*.config.ts$

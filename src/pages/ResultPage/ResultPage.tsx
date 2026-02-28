@@ -81,7 +81,7 @@ export default function ResultPage({ data, content }: ResultPageProps) {
                             <td className="text-start">{cheque.causal}</td>
                             <td>{d.nroCheque}</td>
                             <td>{d.fechaRechazo}</td>
-                            <td className="text-end fw-bold" style={{ color: 'var(--secondary)' }}>{formatearImporte(d.monto)}</td>
+                            <td className="text-end fw-bold" style={{ color: 'var(--accent-number)' }}>{formatearImporte(d.monto)}</td>
                             <td>{d.fechaPago ? d.fechaPago : 'N/A'}</td>
                             <td>{d.estadoMulta}</td>
                           </tr>
@@ -111,7 +111,7 @@ export default function ResultPage({ data, content }: ResultPageProps) {
                         </div>
                         <div className="data-row">
                           <span className="label">Importe</span>
-                          <span className="value fw-bold" style={{ color: 'var(--secondary)' }}>{formatearImporte(d.monto)}</span>
+                          <span className="value fw-bold" style={{ color: 'var(--accent-number)' }}>{formatearImporte(d.monto)}</span>
                         </div>
                         <div className="data-row">
                           <span className="label" data-definition="Estado actual de la multa correspondiente al rechazo.">Estado Multa</span>
