@@ -7,12 +7,15 @@ import ResultCard from '../../components/ResultCard/ResultCard'
 import NoDataMessage from '../../components/NoDataMessage/NoDataMessage'
 
 
+import { AlertForm } from '../../components/AlertForm/AlertForm'
+
 interface ResultPageProps {
   data: Data;
   content: React.RefObject<HTMLDivElement | null> | null;
 }
 export default function ResultPage({ data, content }: ResultPageProps) {
   const { deuda, chequesRechazados } = data
+  const cuit = deuda?.identificacion || chequesRechazados?.identificacion?.toString() || ""
 
   if (!deuda && !chequesRechazados) {
     return (
@@ -125,6 +128,8 @@ export default function ResultPage({ data, content }: ResultPageProps) {
             </div>
           </StyledResultCard>
         )}
+
+        {cuit && <AlertForm cuit={cuit} />}
       </Card>
     </div>
   )
