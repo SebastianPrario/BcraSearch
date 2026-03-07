@@ -13,10 +13,10 @@ const Form: React.FC<FormComponentProps> = ({ handleSubmit, cuit, handleInputCha
   return (
     <StyledCard className="mb-4">
       <div className="card-header">
-        <h5 className="d-flex align-items-center mb-1">
+        <h2 className="h5 d-flex align-items-center mb-1">
           <Search className="me-2 text-primary" size={24} />
           Consultar Situación Bancaria
-        </h5>
+        </h2>
         <small>Ingrese el CUIT para obtener el reporte consolidado</small>
       </div>
       <div className="card-body">

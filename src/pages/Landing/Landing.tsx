@@ -78,7 +78,7 @@ export default function Landing() {
           <div className="container px-4">
             <h1>Consulta de Cheques Rechazados por CUIT | Gratis y Actualizado </h1>
             <p className="mx-auto">
-              <h4>Obtenga informes detallados sobre deudas bancarias y cheques rechazados en segundos. Información directa del Banco Central de la República Argentina.</h4>
+              <h2 className="h4">Obtenga informes detallados sobre deudas bancarias y cheques rechazados en segundos. Información directa del Banco Central de la República Argentina.</h2>
             </p>
           </div>
         </StyledHero>

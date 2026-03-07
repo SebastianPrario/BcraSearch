@@ -73,30 +73,48 @@ const faqs = [
 export const FAQ = () => {
     const [openIndex, setOpenIndex] = useState<number | null>(0);
 
+    const faqSchema = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": faqs.map(faq => ({
+            "@type": "Question",
+            "name": faq.question,
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": faq.answer
+            }
+        }))
+    };
+
     return (
-        <StyledCard className="mt-5 mb-5 overflow-visible">
-            <div className="card-header d-flex align-items-center gap-3">
-                <div style={{ background: 'rgba(var(--primary-rgb), 0.1)', padding: '10px', borderRadius: '12px', color: 'var(--primary)' }}>
-                    <HelpCircle size={24} />
+        <>
+            <script type="application/ld+json">
+                {JSON.stringify(faqSchema)}
+            </script>
+            <StyledCard className="mt-5 mb-5 overflow-visible">
+                <div className="card-header d-flex align-items-center gap-3">
+                    <div style={{ background: 'rgba(var(--primary-rgb), 0.1)', padding: '10px', borderRadius: '12px', color: 'var(--primary)' }}>
+                        <HelpCircle size={24} />
+                    </div>
+                    <div>
+                        <h2 className="h5 mb-0">Preguntas Frecuentes (FAQ)</h2>
+                        <small>Información útil sobre consultas financieras en Argentina</small>
+                    </div>
                 </div>
-                <div>
-                    <h5 className="mb-0">Preguntas Frecuentes (FAQ)</h5>
-                    <small>Información útil sobre consultas financieras en Argentina</small>
+                <div className="card-body">
+                    {faqs.map((faq, index) => (
+                        <FAQItem key={index}>
+                            <Question onClick={() => setOpenIndex(openIndex === index ? null : index)}>
+                                {faq.question}
+                                {openIndex === index ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+                            </Question>
+                            <Answer isOpen={openIndex === index}>
+                                {faq.answer}
+                            </Answer>
+                        </FAQItem>
+                    ))}
                 </div>
-            </div>
-            <div className="card-body">
-                {faqs.map((faq, index) => (
-                    <FAQItem key={index}>
-                        <Question onClick={() => setOpenIndex(openIndex === index ? null : index)}>
-                            {faq.question}
-                            {openIndex === index ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
-                        </Question>
-                        <Answer isOpen={openIndex === index}>
-                            {faq.answer}
-                        </Answer>
-                    </FAQItem>
-                ))}
-            </div>
-        </StyledCard>
+            </StyledCard>
+        </>
     );
 };
