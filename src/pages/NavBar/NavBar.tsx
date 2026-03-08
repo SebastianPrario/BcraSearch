@@ -1,4 +1,4 @@
-import { Building2, Sun, Moon, LayoutDashboard } from 'lucide-react'
+import { Building2, Sun, Moon } from 'lucide-react'
 import { GCheqButton, StyledNavbar, AnnouncementBadge } from '../../components/styled-components'
 import { useTheme } from '../../context/ThemeContext'
 import { useState } from 'react';
