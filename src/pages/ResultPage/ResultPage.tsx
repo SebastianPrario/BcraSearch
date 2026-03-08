@@ -48,7 +48,7 @@ export default function ResultPage({ data, content }: ResultPageProps) {
         {deuda && (
           <StyledResultCard>
             <div className="card-header">
-              <small style={{ opacity: 0.8 }}>Reporte consolidado para la identificación: {deuda?.identificacion}</small>
+              <small style={{ opacity: 0.8 }}>Reporte Consolidado</small>
             </div>
             <ResultCard deuda={deuda} />
           </StyledResultCard>
@@ -129,7 +129,7 @@ export default function ResultPage({ data, content }: ResultPageProps) {
           </StyledResultCard>
         )}
 
-        {cuit && <AlertForm cuit={cuit} />}
+        {cuit && <AlertForm cuit={cuit.toString()} />}
       </Card>
     </div>
   )

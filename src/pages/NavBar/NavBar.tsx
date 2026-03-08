@@ -1,5 +1,5 @@
 import { Building2, Sun, Moon, LayoutDashboard } from 'lucide-react'
-import { GCheqButton, StyledNavbar } from '../../components/styled-components'
+import { GCheqButton, StyledNavbar, AnnouncementBadge } from '../../components/styled-components'
 import { useTheme } from '../../context/ThemeContext'
 import { useState } from 'react';
 import { GCheqModal } from '../../components/GCheqModal/GCheqModal';
@@ -16,18 +16,18 @@ export default function NavBar() {
         </a>
 
         <div className="d-flex align-items-center gap-3">
-           <div className="d-none d-lg-flex justify-content-center mb-2">
-            <GCheqButton onClick={() => setShowGCheq(true)}>
-              <LayoutDashboard size={20} />
-              NUEVO!!! APP para Gestión de Cheques
-            </GCheqButton>
-            </div>
-             <div className="d-lg-none">
+          <div className="d-none d-lg-flex justify-content-center mb-2">
+            <AnnouncementBadge>
+              Ahora con Alertas x Mail
+            </AnnouncementBadge>
+
+          </div>
+          <div className="d-lg-none">
             <GCheqButton onClick={() => setShowGCheq(true)}>
               GCheq
             </GCheqButton>
-            </div>
-           
+          </div>
+
           <button
             onClick={toggleTheme}
             className="btn btn-link me-4 text-decoration-none"
@@ -36,14 +36,14 @@ export default function NavBar() {
           >
             {theme === 'light' ? <Moon size={24} /> : <Sun size={24} />}
           </button>
-         
-          </div>
-          <GCheqModal
-            show={showGCheq}
-            handleClose={() => setShowGCheq(false)}
-          />
+
         </div>
-    
+        <GCheqModal
+          show={showGCheq}
+          handleClose={() => setShowGCheq(false)}
+        />
+      </div>
+
     </StyledNavbar>
   )
 }

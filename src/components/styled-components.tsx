@@ -361,11 +361,19 @@ export const StyledStatusBadge = styled.span<{ status: string }>`
     background: rgba(16, 185, 129, 0.25);
     color: #34d399;
     border: 1px solid rgba(16, 185, 129, 0.4);
+    body.dark & {
+      color: #fff;
+      text-shadow: 0 0 10px rgba(52, 211, 153, 0.5);
+    }
   `
       : `
     background: rgba(239, 68, 68, 0.25);
     color: #f87171;
     border: 1px solid rgba(239, 68, 68, 0.4);
+    body.dark & {
+      color: #fff;
+      text-shadow: 0 0 10px rgba(248, 113, 113, 0.5);
+    }
   `}
 `
 
@@ -806,5 +814,34 @@ export const GCheqModalStyles = styled.div`
       font-size: 0.95rem;
       margin-bottom: 1.5rem;
     }
+  }
+`;
+
+export const AnnouncementBadge = styled.div`
+  background: rgba(var(--primary-rgb), 0.1);
+  border: 1px solid rgba(var(--primary-rgb), 0.2);
+  color: var(--primary);
+  padding: 0.5rem 1.25rem;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  animation: pulse 2s infinite ease-in-out;
+  cursor: default;
+  white-space: nowrap;
+
+  @keyframes pulse {
+    0% { transform: scale(1); box-shadow: 0 4px 15px rgba(var(--primary-rgb), 0.1); }
+    50% { transform: scale(1.02); box-shadow: 0 8px 25px rgba(var(--primary-rgb), 0.2); }
+    100% { transform: scale(1); box-shadow: 0 4px 15px rgba(var(--primary-rgb), 0.1); }
+  }
+
+  &::before {
+    content: '🔔';
+    font-size: 1rem;
   }
 `;
