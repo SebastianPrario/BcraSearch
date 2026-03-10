@@ -22,11 +22,7 @@ export default function NavBar() {
             </AnnouncementBadge>
 
           </div>
-          <div className="d-lg-none">
-            <GCheqButton onClick={() => setShowGCheq(true)}>
-              GCheq
-            </GCheqButton>
-          </div>
+  
 
           <button
             onClick={toggleTheme}
@@ -38,10 +34,11 @@ export default function NavBar() {
           </button>
 
         </div>
-        <GCheqModal
+        {/* se pausa este desarrollo */}
+        {/* <GCheqModal
           show={showGCheq}
           handleClose={() => setShowGCheq(false)}
-        />
+        /> */}
       </div>
 
     </StyledNavbar>
