@@ -1,12 +1,10 @@
 import { Building2, Sun, Moon } from 'lucide-react'
-import { GCheqButton, StyledNavbar, AnnouncementBadge } from '../../components/styled-components'
+import {  StyledNavbar, AnnouncementBadge } from '../../components/styled-components'
 import { useTheme } from '../../context/ThemeContext'
-import { useState } from 'react';
-import { GCheqModal } from '../../components/GCheqModal/GCheqModal';
+
 
 export default function NavBar() {
   const { theme, toggleTheme } = useTheme();
-  const [showGCheq, setShowGCheq] = useState(false)
   return (
     <StyledNavbar className="navbar navbar-expand-lg">
       <div className="container">
