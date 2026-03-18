@@ -35,10 +35,12 @@ export const AlertForm: React.FC<AlertFormProps> = ({ cuit }) => {
             setStatus('success');
             setMessage('¡Suscripción exitosa! Te avisaremos si hay cambios.');
             setEmail('');
-        } catch (error: any) {
-            console.log(error.response.data?.message)
+        } catch (error: unknown) {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const err = error as any;
+            console.log(err.response?.data?.message)
             setStatus('error');
-            setMessage(error.response?.data?.message || 'Error al suscribirse. Intente nuevamente.');
+            setMessage(err.response?.data?.message || 'Error al suscribirse. Intente nuevamente.');
         } finally {
             setLoading(false);
         }

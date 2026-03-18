@@ -42,7 +42,7 @@ export default function Landing() {
         addToHistory(cuitActual, denominacion, data);
       }
     }
-  }, [data]);
+  }, [data, addToHistory]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -65,8 +65,9 @@ export default function Landing() {
     }
   }
 
-  const handleHistoryClick = (historyData: any) => {
-    setData(historyData);
+  const handleHistoryClick = (historyData: unknown) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    setData(historyData as any);
     setShow(true);
   }
 
