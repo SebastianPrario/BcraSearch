@@ -22,7 +22,6 @@ export const AlertForm: React.FC<AlertFormProps> = ({ cuit }) => {
             // In a real app, this token would be in process.env.VITE_ALERT_TOKEN
             // For this implementation, I'll use the one we set in the backend .env
             const token = import.meta.env.VITE_ALERT_TOKEN;
-            console.log(typeof(cuit))
             await axios.post(import.meta.env.VITE_API_ALERT_URL + '/alerts/subscribe', {
                 email,
                 cuit,

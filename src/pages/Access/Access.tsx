@@ -79,7 +79,7 @@ const ErrorMsg = styled.p`
 `;
 
 export default function Access() {
-    const [email, setEmail] = useState('');
+    const [name, setName] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
@@ -90,19 +90,19 @@ export default function Access() {
         e.preventDefault();
         setError('');
         setLoading(true);
-
+        console.log('entra')
         try {
-            //const response = await api.post('/auth/login', { email, password });
-            //const { token, user } = response.data;
-            const token = '00001'
-            const user = { email: 'test@test.com', capacity: 10 }
-            // user object should contain email and capacity (cantidad de cuit permitidos)
-            login(user.email, user.capacity, token);
-            navigate('/dashboard');
+          console.log(`${import.meta.env.VITE_API_ACCESS_USER}/auth/login`) 
+          const response = await api.post(`${import.meta.env.VITE_API_ACCESS_USER}/auth/login`, { name, password });
+          console.log(response.data)
+          const { token, user } = response.data;
+        // user object should contain email and capacity (cantidad de cuit permitidos)
+             login(user.email, user.name, user.capacity, token);
+             navigate('/dashboard');
         } catch (err: any) {
-            setError(err.response?.data?.message || 'Error al iniciar sesión. Verifique sus credenciales.');
+             setError(err.response?.data?.message || 'Error al iniciar sesión. Verifique sus credenciales.');
         } finally {
-            setLoading(false);
+           setLoading(false);
         }
     };
 
@@ -113,12 +113,12 @@ export default function Access() {
                 <LoginForm onSubmit={handleSubmit}>
                     <Title>Acceso Usuarios</Title>
                     <FormGroup>
-                        <Label>Email</Label>
+                        <Label>Nombre de Usuario</Label>
                         <Input
-                            type="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            placeholder="tu@email.com"
+                            type="text"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            placeholder="Tu nombre de usuario"
                             required
                         />
                     </FormGroup>

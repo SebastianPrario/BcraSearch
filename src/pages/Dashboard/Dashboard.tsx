@@ -179,8 +179,8 @@ export default function Dashboard() {
     const fetchCuits = async () => {
         setLoading(true);
         try {
-            const response = await api.get('/user/cuits');
-            setCuits(response.data);
+            const response = await api.get(`${import.meta.env.VITE_API_ACCESS_USER}/users/profile`);
+            setCuits(response.data.cuits);
         } catch (error) {
             console.error('Error fetching cuits:', error);
         } finally {
@@ -199,7 +199,7 @@ export default function Dashboard() {
 
         setIsAdding(true);
         try {
-            const response = await api.post('/user/cuits', { cuit: newCuit });
+            const response = await api.post(`${import.meta.env.VITE_API_ACCESS_USER}/users/cuits`, { cuit: newCuit });
             setCuits([...cuits, response.data]);
             setNewCuit('');
         } catch (error) {
