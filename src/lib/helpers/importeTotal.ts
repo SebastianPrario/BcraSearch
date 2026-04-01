@@ -1,17 +1,15 @@
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const total = (chequesRechazados: any) => {
+import type { ChequesRechazados } from '../../types/api';
+
+export const total = (chequesRechazados: ChequesRechazados | null | undefined) => {
   let totalValue = 0;
   let cantidadValue = 0;
   
   if (chequesRechazados?.causales) {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (chequesRechazados.causales as any[]).forEach((cheque: any) => {
-      if (cheque.entidades) {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        (cheque.entidades as any[]).forEach((entidad: any) => {
+    chequesRechazados.causales.forEach((causal) => {
+      if (causal.entidades) {
+        causal.entidades.forEach((entidad) => {
           if (entidad.detalle) {
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            (entidad.detalle as any[]).forEach((d: any) => {
+            entidad.detalle.forEach((d) => {
               totalValue += d.monto;
               cantidadValue += 1;
             });

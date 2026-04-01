@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyledResultCard, DesktopContainer, MobileContainer, MobileDataCard } from '../../components/styled-components'
 import { Card } from 'react-bootstrap'
-import type { Data, Cheque } from '../../types/api'
+import type { Data, ChequeCausal } from '../../types/api'
 import { formatearImporte } from '../../lib/helpers/formaterImporte'
 import ResultCard from '../../components/ResultCard/ResultCard'
 import NoDataMessage from '../../components/NoDataMessage/NoDataMessage'
@@ -27,19 +27,19 @@ export default function ResultPage({ data, content }: ResultPageProps) {
     );
   }
   const total = () => {
-    let total = 0;
-    let cantidad = 0;
+    let totalVal = 0;
+    let cantidadVal = 0;
 
-    chequesRechazados?.causales.forEach((cheque: Cheque) => {
+    chequesRechazados?.causales.forEach((cheque: ChequeCausal) => {
       cheque.entidades.forEach((entidad) => {
         entidad.detalle.forEach((d) => {
-          total += d.monto;
-          cantidad += 1;
+          totalVal += d.monto;
+          cantidadVal += 1;
         });
       });
     });
 
-    return { total, cantidad };
+    return { total: totalVal, cantidad: cantidadVal };
   }
   return (
 

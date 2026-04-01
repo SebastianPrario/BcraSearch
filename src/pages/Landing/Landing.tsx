@@ -5,7 +5,7 @@ import {
   StyledHistoryList,
   StyledHistoryItem,
 } from '../../components/styled-components'
-import UseFech from "../../lib/hook/UseFech"
+import useFetchData from "../../hooks/useFetchData"
 import { ResultModal } from "../../components/ResultModal/ResultModal"
 import ResultPage from "../ResultPage/ResultPage"
 import NavBar from "../NavBar/NavBar"
@@ -15,13 +15,13 @@ import Footer from "../../components/Footer/Footer"
 import { Container } from "react-bootstrap"
 import { validarCuit } from "../../lib/helpers/validarCuit"
 import FeedbackWidget from "../../components/FeedbackWidget/FeedbackWidget"
-import { useSearchHistory } from "../../lib/hook/useSearchHistory"
+import useSearchHistory from "../../hooks/useSearchHistory"
 import { Clock } from "lucide-react"
 import { FAQ } from "../../components/FAQ"
 
 export default function Landing() {
   const [cuit, setCuit] = useState("")
-  const { data, setData, loading, setLoading, setError, fetchData } = UseFech()
+  const { data, setData, loading, setError, fetchData } = useFetchData()
   const [show, setShow] = useState(false)
   const { history: searchHistory, addToHistory } = useSearchHistory()
 
@@ -50,17 +50,15 @@ export default function Landing() {
       setError("Por favor ingrese un CUIT válido (11 dígitos)")
       return
     }
-    setLoading(true)
-    setError("")
+    
     try {
       const cuitLimpio = cuit.replace(/[-\s]/g, "")
-      fetchData(cuitLimpio)
+      await fetchData(cuitLimpio)
+      setShow(true)
     } catch (error) {
-      console.log(error)
+      console.error(error)
       setError("Error al consultar el CUIT. Intente nuevamente.")
     } finally {
-      setShow(true)
-      setLoading(false)
       setCuit("")
     }
   }
