@@ -4,6 +4,7 @@ import {
   StyledHero,
   StyledHistoryList,
   StyledHistoryItem,
+  StyledAlert,
 } from '../../components/styled-components'
 import useFetchData from "../../hooks/useFetchData"
 import { ResultModal } from "../../components/ResultModal/ResultModal"
@@ -16,13 +17,14 @@ import { Container } from "react-bootstrap"
 import { validarCuit } from "../../lib/helpers/validarCuit"
 import FeedbackWidget from "../../components/FeedbackWidget/FeedbackWidget"
 import useSearchHistory from "../../hooks/useSearchHistory"
-import { Clock } from "lucide-react"
+import { Clock, AlertCircle } from "lucide-react"
 import { FAQ } from "../../components/FAQ"
 
 export default function Landing() {
   const [cuit, setCuit] = useState("")
   const { data, setData, loading, setError, fetchData } = useFetchData()
   const [show, setShow] = useState(false)
+  const [localError, setLocalError] = useState<string | null>(null)
   const { history: searchHistory, addToHistory } = useSearchHistory()
 
   const handleClose = () => setShow(false)
@@ -46,6 +48,7 @@ export default function Landing() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    setLocalError(null)
     if (!validarCuit(cuit)) {
       setError("Por favor ingrese un CUIT válido (11 dígitos)")
       return
@@ -53,11 +56,16 @@ export default function Landing() {
     
     try {
       const cuitLimpio = cuit.replace(/[-\s]/g, "")
-      await fetchData(cuitLimpio)
-      setShow(true)
+      const result = await fetchData(cuitLimpio)
+      
+      if (result.isConnectionError) {
+        setLocalError(result.errorMsg)
+      } else if (result.showModal) {
+        setShow(true)
+      }
     } catch (error) {
       console.error(error)
-      setError("Error al consultar el CUIT. Intente nuevamente.")
+      setLocalError("Error al consultar el CUIT. Intente nuevamente.")
     } finally {
       setCuit("")
     }
@@ -86,6 +94,12 @@ export default function Landing() {
           <div className="row justify-content-center">
             <div className="col-lg-8">
               <div style={{ position: 'relative' }}>
+                {localError && (
+                  <StyledAlert variant="danger" className="mb-4">
+                    <AlertCircle size={20} />
+                    <span>{localError}</span>
+                  </StyledAlert>
+                )}
                 <Form
                   handleSubmit={handleSubmit}
                   cuit={cuit}
